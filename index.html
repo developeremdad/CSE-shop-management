@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+        #slide-out {
+            background: #333333;
+            font-size: 20px;
+            padding: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #slide-out li {
+            list-style: none;
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        #slide-out li a {
+            text-decoration: none;
+            color: aquamarine;
+        }
+
+        #slide-out li a:hover {
+            color: rgb(52, 194, 194);
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            margin-bottom: 15px;
+        }
+
+        .divCenter {
+            margin: auto;
+            width: 50%;
+        }
+
+        .modal-body .form-horizontal {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- This is the main navbar section -->
+    <nav>
+        <div class="nav-wrapper z-depth-5 red darken-2">
+            <ul id="slide-out" class="side-nav">
+                <li><a href="#"><i class="fa fa-television"> </i> Home </a> </li>
+                <li><a href="#" data-toggle="modal" data-target="#addNewProductModal" class="addNewProduct"><i
+                            class="fa fa-plus-circle"></i> Add New Product </a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- This is the main body<div> container section -->
+    <div class="container-fluid">
+        <!-- 2ndPart: handles the ProductDashboard display -->
+        <div class="mx-auto">
+            <div class="card border-primary">
+                <div class="card-header" id="usernameSpan">
+                    <h3 id="h3header">Product Dashboard</h3>
+                </div>
+                <div class="card-body text-primary" id="productDashboard">
+                    <form>
+                        <div class="input-field">
+                            <input id="search" type="search" required class="autocomplete"
+                                placeholder="Search Product List">
+                        </div>
+                    </form>
+                    <h4 class="card-title"> Current Products</h4>
+                    <ul class="list-group" id="productDisplay">
+                        <!-- codes  here supplied via JS-->
+                    </ul>
+                </div>
+                <button class="btn btn-outline-success btn-sm m-3 addNewProduct" id="addNewProduct" data-toggle="modal"
+                    data-target="#addNewProductModal" style="width: 20%">Add New Product</button>
+            </div>
+        </div>
+        <!-- 3rdPart: responds to the main modal call -->
+        <div class="modal fade" id="addNewProductModal" tabindex="-1" role="dialog"
+            aria-labelledby="addNewProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- header for the modal -->
+                    <div class="modal-header">
+                        <h4 class="modal-title left" id="addNewProductModalLabel">New Product Form</h4>
+                    </div>
+                    <!-- body of the modal -->
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" id="modalForm">
+                            <div class="form-group">
+                                <label for="productName">Product Name</label>
+                                <input id="productName" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label for="productDescription">Description</label>
+                                <textarea id="productDescription" type="text" style="height: 100px"></textarea>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="productCategory">Category</label>
+                                <select id="productCategory" class="custom-select">
+                                    <option value=" Shirt">Shirt</option>
+                                    <option value="Book">Book</option>
+                                    <option value="Pant">Pant</option>
+                                    <option value=" pen">Shirt</option>
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Shoe">Shoe</option>
+                                    <option value="Charger">Charger</option>
+                                    <option value="Head phone">Head phone</option>
+                                    <option value="Mouse">Mouse</option>
+                                    <option value="Computer">Computer</option>
+                                    <option value="Clock">Clock</option>
+                                    <option value="Light">Light</option>
+                                    <option value="Fan">Fan</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer align-content-center" id="modalFooter">
+                                <button type="button" class="btn btn-outline-danger btn-sm m-2" data-dismiss="modal"
+                                    id="modalClose"><i class="fa fa-close"></i> Close
+                                </button>
+                                <button type="button" class="btn btn-outline-success btn-sm m-2" id="modalSubmit"><i
+                                        class="fa fa-save"></i> Add Entry </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(".button-collapse").sideNav();
+                $("#aboutUsModal").modal();
+                $("input.autocomplete").autocomplete({
+                    data: {
+                        "Shirt": null, "Book": null, "Pant": null, "pen": null, "Mobile": null,
+                        "Shoe": null, "Charger": null, "Head phone": null, "Mouse": null, "Computer": null,
+                        "Clock": null, "Light": null, "Fan": null
+                    },
+                    limit: 7,
+                    minLength: 1
+                });
+            });
+
+            function randomNumberID() {
+                return Math.floor(Math.random() * (1000002 - 1 + 1)) + 1;
+            }
+            $(document).ready(function () {
+                getProductLists();
+                document.getElementById('modalSubmit').addEventListener('click', modalSubmit);
+
+                function modalSubmit(e) {
+                    let productTempId = randomNumberID();
+                    let productName = document.getElementById('productName').value;
+                    let productDescription = document.getElementById('productDescription').value;
+                    let productCategory = document.getElementById('productCategory').value;
+
+                    const productId = productTempId + productName + randomNumberID(); //Used to give each product a unique id
+                    if (productName !== '' && productDescription !== '') {
+                        let newProduct = {
+                            id: productId,
+                            name: productName.toUpperCase(),
+                            category: productCategory,
+                            description: productDescription
+                        };
+
+                        //Add new product to localStorage. The localStorage key for all the product is productList'
+                        if (localStorage.getItem("productList") === null || localStorage.getItem("productList") === [] || localStorage.getItem("productList") === undefined) {
+                            let productList = [];
+                            productList.push(newProduct);
+                            localStorage.setItem("productList", JSON.stringify(productList));
+                        } else {
+                            let productList = JSON.parse(localStorage.getItem("productList"));
+                            productList.push(newProduct);
+                            localStorage.setItem("productList", JSON.stringify(productList));
+                        }
+                    } else {
+                        alert('All fields are required. Please check your entries again');
+                    }
+                    getProductLists();
+
+                    resetForm();
+                    e.preventDefault();
+                }
+
+            }); //DocumentBody end tag
+
+            //get the data stored in the localStorage for display on load
+            function getProductLists() {
+                if (localStorage.getItem("productList") === null) {
+                    alert("Your dashboard is currently empty. Use the add button to add new products.");
+                    document.getElementById("search").disabled = true;
+                } else {
+                    document.getElementById("search").disabled = false;
+                    let productList = JSON.parse(localStorage.getItem("productList"));
+                    let productDisplay = document.getElementById('productDisplay');
+                    //Display result
+                    productDisplay.innerHTML = '';
+                    for (let i = 0; i < productList.length; i++) {
+                        let id = productList[i].id;
+                        let name = productList[i].name;
+                        let category = productList[i].category;
+                        let description = productList[i].description;
+
+                        productDisplay.innerHTML += '<li class="list-group-item"><strong>' + name + '</strong><p>' + category + '</p><p>' + description + '</p><p><a' +
+                            ' href="#" onclick="editProduct(\'' + id + '\')" data-toggle="modal" data-target="#addNewProductModal">' +
+                            '<i class="fa fa-edit green-text darken-2 "></i>&nbsp;Edit</a> &nbsp;&nbsp; ' +
+                            '<a href="#" id="deleteId" onclick="deleteProduct(\'' + id + '\')"><i class="fa fa-trash' +
+                            ' red-text' +
+                            ' darken-2"></i>&nbsp;' +
+                            ' Delete</a>' +
+                            ' </p>' +
+                            '</li>';
+                    }
+                }
+            }
+
+
+            // deleting the main bookmark.
+            function deleteProduct(id) {
+                let productList = JSON.parse(localStorage.getItem("productList"));
+                for (let i = 0; i < productList.length; i++) {
+                    if (productList[i].id === id) {
+                        productList.splice(i, 1);
+                        //console.log(result);
+                    }
+                }
+                localStorage.setItem("productList", JSON.stringify(productList)); //reset the values in the local storage
+                getProductLists(); // to quickly display what is remaining from local storage.
+            }
+
+            // Editing a product
+            function editProduct(id) {
+                "use strict";
+                document.getElementById('modalSubmit').style.display = "none";
+                document.getElementById("addNewProductModalLabel").textContent = "Edit Product";
+
+                let tempId = id;
+                let parentDiv = document.getElementById('modalFooter');
+                let productList = JSON.parse(localStorage.getItem("productList"));
+
+
+                if (parentDiv.contains(document.getElementById("editButton"))) {
+                    document.getElementById('editButton').disabled = false;
+                } else {
+                    let editButton = document.createElement('button');
+                    editButton.id = "editButton";
+                    editButton.className = "fa fa-hdd-o btn btn-outline-primary btn-sm m-2";
+                    editButton.textContent = " Save data";
+                    parentDiv.appendChild(editButton);
+                }
+                for (let i = 0; i < productList.length; i++) {
+                    if (productList[i].id === id) {
+                        document.getElementById("productName").value = productList[i].name;
+                        document.getElementById("productDescription").value = productList[i].description;
+                        document.getElementById("productCategory").value = productList[i].category;
+                    }
+                }
+
+                document.getElementById("editButton").addEventListener("click", function () {
+                    addProduct();
+                    let productList = JSON.parse(localStorage.getItem("productList"));
+                    for (let i = 0; i < productList.length; i++) {
+                        if (productList[i].id === tempId) {
+                            productList.splice(i, 1);
+                        }
+                    }
+                    localStorage.setItem("productList", JSON.stringify(productList));
+                    getProductLists();
+                    resetForm();
+                    document.getElementById("editButton").style.display = "none";
+
+                    $(".addNewProduct").on('click', productFormReset());
+
+                });
+
+            }
+
+            function resetForm() {
+                document.getElementById("productName").value = "";
+                document.getElementById("productDescription").value = "";
+                document.getElementById("productCategory").value = "";
+            }
+
+            function productFormReset() {
+                document.getElementById('modalSubmit').style.display = "block";
+                document.getElementById("addNewProductModalLabel").textContent = "New Product Form";
+                document.getElementById('editButton').style.display = "none";
+            }
+
+            function addProduct() {
+                let productTempId = randomNumberID();
+                let productName = document.getElementById('productName').value;
+                let productDescription = document.getElementById('productDescription').value;
+                let productCategory = document.getElementById('productCategory').value;
+
+                const productId = productTempId + productName + randomNumberID(); //Used to give each product a unique id
+                if (productName !== '' && productDescription !== '') {
+                    let newProduct = {
+                        id: productId,
+                        name: productName.toUpperCase(),
+                        category: productCategory,
+                        description: productDescription
+                    };
+                    if (localStorage.getItem("productList") === null || localStorage.getItem("productList") === [] || localStorage.getItem("productList") === undefined) {
+                        let productList = [];
+                        productList.push(newProduct);
+                        localStorage.setItem("productList", JSON.stringify(productList));
+                    } else {
+                        let productList = JSON.parse(localStorage.getItem("productList"));
+                        productList.push(newProduct);
+                        localStorage.setItem("productList", JSON.stringify(productList));
+                    }
+                }
+            }
+
+        </script>
+</body>
+
+</html>
